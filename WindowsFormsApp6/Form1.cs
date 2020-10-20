@@ -144,13 +144,15 @@ namespace WindowsFormsApp6
         //创建文件夹被点击
         private void button1_Click(object sender, EventArgs e)
         {
+           
+
 
             if (comboBox_策略.Text == "" || comboBox_刀具.Text == "")
             {
                 MessageBox.Show("未选择策略或者刀具");
                 return;
             }
-
+            保存配置();
             string pthfname;
             int id = treeView1.Nodes[4].GetNodeCount(false);
             id += 1;
@@ -1469,6 +1471,27 @@ namespace WindowsFormsApp6
                 }
 
             }
+        }
+       
+        //发生改变时
+        private void treeView1_AfterSelect(object sender, TreeViewEventArgs e)
+        {
+            读取配置();
+        }
+
+        private void button20_Click(object sender, EventArgs e)
+        {
+            if (projectpath == null)
+            {
+                保存项目();
+            }
+            System.Diagnostics.Process.Start(projectpath);
+
+        }
+        //即将发生改变时
+        private void treeView1_BeforeSelect(object sender, TreeViewCancelEventArgs e)
+        {
+            保存配置();
         }
     }
 }

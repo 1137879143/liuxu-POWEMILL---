@@ -203,6 +203,7 @@
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.tabPage4 = new System.Windows.Forms.TabPage();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.button20 = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabPage3.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -234,7 +235,7 @@
             // progressBar1
             // 
             this.progressBar1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.progressBar1.Location = new System.Drawing.Point(0, 715);
+            this.progressBar1.Location = new System.Drawing.Point(0, 762);
             this.progressBar1.Name = "progressBar1";
             this.progressBar1.Size = new System.Drawing.Size(1090, 20);
             this.progressBar1.TabIndex = 9;
@@ -261,7 +262,7 @@
             this.tabControl1.Location = new System.Drawing.Point(0, 1);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(1052, 715);
+            this.tabControl1.Size = new System.Drawing.Size(1052, 755);
             this.tabControl1.TabIndex = 10;
             // 
             // tabPage3
@@ -272,7 +273,7 @@
             this.tabPage3.Controls.Add(this.treeView1);
             this.tabPage3.Location = new System.Drawing.Point(4, 22);
             this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Size = new System.Drawing.Size(1044, 689);
+            this.tabPage3.Size = new System.Drawing.Size(1044, 729);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "刀路模板";
             this.tabPage3.UseVisualStyleBackColor = true;
@@ -1844,6 +1845,8 @@
             this.treeView1.ShowNodeToolTips = true;
             this.treeView1.Size = new System.Drawing.Size(265, 522);
             this.treeView1.TabIndex = 5;
+            this.treeView1.BeforeSelect += new System.Windows.Forms.TreeViewCancelEventHandler(this.treeView1_BeforeSelect);
+            this.treeView1.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeView1_AfterSelect);
             // 
             // tabPage1
             // 
@@ -2099,11 +2102,22 @@
             this.tabPage4.Text = "工具箱";
             this.tabPage4.UseVisualStyleBackColor = true;
             // 
+            // button20
+            // 
+            this.button20.Location = new System.Drawing.Point(991, 762);
+            this.button20.Name = "button20";
+            this.button20.Size = new System.Drawing.Size(99, 23);
+            this.button20.TabIndex = 11;
+            this.button20.Text = "打开项目文件夹";
+            this.button20.UseVisualStyleBackColor = true;
+            this.button20.Click += new System.EventHandler(this.button20_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1090, 735);
+            this.ClientSize = new System.Drawing.Size(1090, 782);
+            this.Controls.Add(this.button20);
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.progressBar1);
             this.Name = "Form1";
@@ -2312,6 +2326,7 @@
         private System.Windows.Forms.TabPage tabPage6;
         private System.Windows.Forms.Button button19;
         private System.Windows.Forms.Button button18;
+        private System.Windows.Forms.Button button20;
     }
 }
 
