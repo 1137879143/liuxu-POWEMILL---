@@ -9,6 +9,7 @@ using PM = PowerSolutionDOTNetOLE.clsPowerMILLOLE;
 using PMINI = PowerSolutionDOTNetOLE.clsIniFile;
 using PMPOINT = PowerSolutionDOTNetOLE.clsPoint3D;
 using PMFILE = PowerSolutionDOTNetOLE.clsFileFunctions;
+using System.IO;
 
 namespace WindowsFormsApp6
 {
@@ -18,7 +19,7 @@ namespace WindowsFormsApp6
         public string pftf = AppDomain.CurrentDomain.BaseDirectory;       //文件运行目录
 
         Pmmclass pma = new Pmmclass();
-        
+
 
         public Form1()
         {
@@ -33,7 +34,7 @@ namespace WindowsFormsApp6
         void DrawImg()
 
         {
-           
+
             Graphics g = panel1.CreateGraphics();
             g.TranslateTransform(AutoScrollPosition.X, AutoScrollPosition.Y);
             this.AutoScrollMinSize = new Size(800, 600);
@@ -1305,33 +1306,87 @@ namespace WindowsFormsApp6
             getzuobiao();
         }
 
-
+        public string projectpath;
         //IniHelper ini = new IniHelper(@"D:\");
         private void button18_Click_1(object sender, EventArgs e)
         {
 
-
-            //   ini.WriteValue(treeView1.SelectedNode.Text, textBox1.Text, textBox1.Text);
-            // PMINI.WriteIniValue()
-            // string tempdirectory=  PMFILE.GetTempDirectory();
-            // string aa = "";
-
-            //  object ob = "";
-            //  string tit = "aa";
-            //  string star = "";
-            //  string tempdirectory = PMFILE.BrowseForFolder(ref ob, ref tit, ref star);
-            //  print(tempdirectory);
-            // print(aa);//  项目保存 PROJECT SAVE
-
-            //   PMFILE.BrowseForFolder();
-            //  string projectpath= PM.ExecuteEx("PROJECT SAVE");
-          //  print(projectpath);
-
+            //  保存项目();
+            保存配置();
         }
 
         private void button19_Click_1(object sender, EventArgs e)
         {
             //  ini.ReadValue(treeView1.SelectedNode.Text, textBox1.Text);
+        }
+        private void 保存项目()
+        {
+
+            projectpath = PM.ExecuteEx("PROJECT SAVE");
+            projectpath = jy.StringHelper.Between(projectpath, "'", "'", false);
+            //  print(projectpath);
+        }
+        private void 保存配置()
+        {
+            if (treeView1.SelectedNode != null)
+            {
+                if (projectpath == null)
+                {
+                    保存项目();
+                }
+
+
+                string ininame = treeView1.SelectedNode.Text;//取选中树的名字
+                string aa = projectpath + "/ini/" + ininame + ".ini";//配置文件路径
+
+                if (!Directory.Exists(projectpath + "/ini"))
+                {
+                    Directory.CreateDirectory(projectpath + "/ini");//如若不存在就创建ini文件夹，
+
+                }
+                ///循环写配置 
+
+                foreach (Control item in panel1.Controls)
+                {
+                    //  print(item.Name);
+
+                    foreach (Control Control in item.Controls)
+                    {
+                        //   print(Control.Name);
+
+                        PMINI.WriteIniValue(aa, "Enabled", Control.Name, Control.Enabled);//循坏写Enabled
+
+                        if (Control is TextBox)
+                        {
+                            TextBox t = (TextBox)Control;
+                            PMINI.WriteIniValue(aa, "textbox", t.Name, t.Text);//循坏写textbox
+
+                        }
+                        else if (Control is ComboBox)
+                        {
+                            ComboBox c = (ComboBox)Control;
+                            PMINI.WriteIniValue(aa, "ComboBox", c.Name, c.Text);//循坏写ComboBox
+                        }
+                        else if (Control is CheckBox)
+                        {
+                            CheckBox ck = (CheckBox)Control;
+
+                            PMINI.WriteIniValue(aa, "CheckBox", ck.Name, ck.Checked);//循坏写CheckBox
+
+                        }
+
+
+
+
+                    }
+
+
+
+                }
+                print("保存配置" + aa);
+
+
+            }
         }
     }
 }
