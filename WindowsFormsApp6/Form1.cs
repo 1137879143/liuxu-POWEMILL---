@@ -1317,7 +1317,7 @@ namespace WindowsFormsApp6
 
         private void button19_Click_1(object sender, EventArgs e)
         {
-            //  ini.ReadValue(treeView1.SelectedNode.Text, textBox1.Text);
+            读取配置();
         }
         private void 保存项目()
         {
@@ -1326,6 +1326,9 @@ namespace WindowsFormsApp6
             projectpath = jy.StringHelper.Between(projectpath, "'", "'", false);
             //  print(projectpath);
         }
+        /// <summary>
+        /// 还没写完 以后想起了再接着写  已配置 Enabled Visible textbox ComboBox CheckBox
+        /// </summary>
         private void 保存配置()
         {
             if (treeView1.SelectedNode != null)
@@ -1355,12 +1358,12 @@ namespace WindowsFormsApp6
                         //   print(Control.Name);
 
                         PMINI.WriteIniValue(aa, "Enabled", Control.Name, Control.Enabled);//循坏写Enabled
+                        PMINI.WriteIniValue(aa, "Visible", Control.Name, Control.Visible);//循坏写Visible
 
                         if (Control is TextBox)
                         {
                             TextBox t = (TextBox)Control;
                             PMINI.WriteIniValue(aa, "textbox", t.Name, t.Text);//循坏写textbox
-
                         }
                         else if (Control is ComboBox)
                         {
@@ -1370,21 +1373,100 @@ namespace WindowsFormsApp6
                         else if (Control is CheckBox)
                         {
                             CheckBox ck = (CheckBox)Control;
-
                             PMINI.WriteIniValue(aa, "CheckBox", ck.Name, ck.Checked);//循坏写CheckBox
-
                         }
-
-
-
 
                     }
 
 
-
                 }
-                print("保存配置" + aa);
 
+
+
+            }
+        }
+
+        /// <summary>
+        /// 还没写完 以后想起了再接着读  已配置 Enabled Visible textbox ComboBox CheckBox
+        /// </summary>
+        private void 读取配置()
+        {
+
+            if (treeView1.SelectedNode != null)
+            {
+                if (projectpath == null)
+                {
+                    保存项目();
+                }
+
+
+                string ininame = treeView1.SelectedNode.Text;//取选中树的名字
+                string aa = projectpath + "/ini/" + ininame + ".ini";//配置文件路径
+
+
+                foreach (Control item in panel1.Controls)
+                {
+                    //  print(item.Name);
+
+                    foreach (Control Control in item.Controls)
+                    {
+
+                        //
+                        object getis = PMINI.GetIniValue(aa, "Enabled", Control.Name, "");
+                        //  print(Control.Name+getis.ToString());
+                        if (getis.ToString() == "True")
+                        {
+                            Control.Enabled = true;
+                        }
+                        else if (getis.ToString() == "False")
+                        {
+                            Control.Enabled = false;
+                        }
+
+
+                        object getvis = PMINI.GetIniValue(aa, "Visible", Control.Name, "");
+                        //  print(Control.Name+getis.ToString());
+                        if (getis.ToString() == "True")
+                        {
+                            Control.Visible = true;
+                        }
+                        else if (getis.ToString() == "False")
+                        {
+                            Control.Visible = false;
+                        }
+
+
+                        if (Control is TextBox)
+                        {
+                            TextBox t = (TextBox)Control;
+                            Control.Text = PMINI.GetIniValue(aa, "TextBox", Control.Name, "").ToString();
+                        }
+                        else if (Control is ComboBox)
+                        {
+                            ComboBox c = (ComboBox)Control;
+                            Control.Text = PMINI.GetIniValue(aa, "ComboBox", Control.Name, "").ToString();
+                        }
+                        else if (Control is CheckBox)
+                        {
+                            CheckBox ck = (CheckBox)Control;
+
+                            object getck = PMINI.GetIniValue(aa, "CheckBox", Control.Name, "");
+
+                            if (getck.ToString() == "True")
+                            {
+
+                                ck.Checked = true;
+                            }
+                            else if (getck.ToString() == "False")
+                            {
+                                ck.Checked = false;
+                            }
+                        }
+
+
+
+                    }
+                }
 
             }
         }
