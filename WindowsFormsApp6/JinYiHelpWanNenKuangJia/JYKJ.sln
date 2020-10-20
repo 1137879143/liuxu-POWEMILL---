@@ -1,0 +1,37 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.489
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JinYiHelp", "JinYiHelp\JinYiHelp.csproj", "{1189BFFA-AE97-45C4-BD26-51067737C4D3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JYKJTest", "JYKJ.Test\JYKJTest.csproj", "{E1917811-D1D9-462D-A6C5-F3996F778388}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JYKJDome", "JYKJDome\JYKJDome.csproj", "{4E49639D-3316-4768-8793-F5E89A1FCB16}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1189BFFA-AE97-45C4-BD26-51067737C4D3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1189BFFA-AE97-45C4-BD26-51067737C4D3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1189BFFA-AE97-45C4-BD26-51067737C4D3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1189BFFA-AE97-45C4-BD26-51067737C4D3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E1917811-D1D9-462D-A6C5-F3996F778388}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E1917811-D1D9-462D-A6C5-F3996F778388}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E1917811-D1D9-462D-A6C5-F3996F778388}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E1917811-D1D9-462D-A6C5-F3996F778388}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4E49639D-3316-4768-8793-F5E89A1FCB16}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4E49639D-3316-4768-8793-F5E89A1FCB16}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4E49639D-3316-4768-8793-F5E89A1FCB16}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4E49639D-3316-4768-8793-F5E89A1FCB16}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {61AAC917-12F4-4B13-9CEF-317D9CB80CB5}
+	EndGlobalSection
+EndGlobal
