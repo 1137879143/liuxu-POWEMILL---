@@ -45,33 +45,6 @@ namespace WindowsFormsApp6
             this.AutoScrollMinSize = new Size(800, 600); //这句话的意思是当窗口小于宽800高600的时候就会出现滚动条
         }
 
-        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button1_Click_2(object sender, EventArgs e)
-        {
-
-
-        }
-
-
-
-        private void comboBox1_BindingContextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void checkBox1_CheckedChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void comboBox10_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
 
 
         private string[] kaicu = { "偏置区域清除", "偏置区域二粗", "偏置平坦区域", "平行区域清除", "平行区域二粗", "平行平坦区域", "等高", "试料", "面铣削", "打中心点", "钻孔加工", "全自动钻孔", "外形侧光", "模型轮廓", "倒角", "插铣" };
@@ -128,7 +101,7 @@ namespace WindowsFormsApp6
 
         }
 
-        string 状态名称;
+        string 状态名称 = "开粗";
         //开粗被选中
         private void radioButton1_CheckedChanged(object sender, EventArgs e)
         {
@@ -144,7 +117,7 @@ namespace WindowsFormsApp6
         //创建文件夹被点击
         private void button1_Click(object sender, EventArgs e)
         {
-           
+
 
 
             if (comboBox_策略.Text == "" || comboBox_刀具.Text == "")
@@ -1225,7 +1198,7 @@ namespace WindowsFormsApp6
             {
                 //  MessageBox.Show("powermill连接失败,重新建立链接!");
                 this.Text = "链接pm失败";
-                if (PM.ConnectToNew())
+                if (PM.StartAndConnectToPowerMILL())
                 {
                     this.Text = "链接pm成功";
                 }
@@ -1402,9 +1375,15 @@ namespace WindowsFormsApp6
                 }
 
 
+
                 string ininame = treeView1.SelectedNode.Text;//取选中树的名字
                 string aa = projectpath + "/ini/" + ininame + ".ini";//配置文件路径
 
+
+                //   if (File.Exists("aa") == false)//如果配置不存在就返回
+                //   {
+                //       return;
+                //   }
 
                 foreach (Control item in panel1.Controls)
                 {
@@ -1415,27 +1394,37 @@ namespace WindowsFormsApp6
 
                         //
                         object getis = PMINI.GetIniValue(aa, "Enabled", Control.Name, "");
+
                         //  print(Control.Name+getis.ToString());
-                        if (getis.ToString() == "True")
+                        if (getis.ToString() != "")
                         {
-                            Control.Enabled = true;
+                            if (getis.ToString() == "True")
+                            {
+                                Control.Enabled = true;
+                            }
+                            else if (getis.ToString() == "False")
+                            {
+                                Control.Enabled = false;
+                            }
                         }
-                        else if (getis.ToString() == "False")
-                        {
-                            Control.Enabled = false;
-                        }
+
 
 
                         object getvis = PMINI.GetIniValue(aa, "Visible", Control.Name, "");
+
                         //  print(Control.Name+getis.ToString());
-                        if (getis.ToString() == "True")
+                        if (getvis.ToString() != "")
                         {
-                            Control.Visible = true;
+                            if (getis.ToString() == "True")
+                            {
+                                Control.Visible = true;
+                            }
+                            else if (getis.ToString() == "False")
+                            {
+                                Control.Visible = false;
+                            }
                         }
-                        else if (getis.ToString() == "False")
-                        {
-                            Control.Visible = false;
-                        }
+
 
 
                         if (Control is TextBox)
@@ -1472,7 +1461,7 @@ namespace WindowsFormsApp6
 
             }
         }
-       
+
         //发生改变时
         private void treeView1_AfterSelect(object sender, TreeViewEventArgs e)
         {
@@ -1492,6 +1481,16 @@ namespace WindowsFormsApp6
         private void treeView1_BeforeSelect(object sender, TreeViewCancelEventArgs e)
         {
             保存配置();
+        }
+
+        private void treeView1_DrawNode(object sender, DrawTreeNodeEventArgs e)
+        {
+            e.DrawDefault = true;//树中绘制高亮
+        }
+
+        private void panel2_Paint(object sender, PaintEventArgs e)
+        {
+
         }
     }
 }
